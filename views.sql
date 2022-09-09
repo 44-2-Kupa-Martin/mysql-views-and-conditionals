@@ -37,3 +37,15 @@ CREATE VIEW v_ListGermanClients AS
 
 --Ej3
 
+DROP VIEW IF EXISTS v_ListOrderDetails;
+
+CREATE VIEW v_ListOrderDetails AS
+    SELECT
+        *,
+        precio_unidad*cantidad*(1-descuento) AS 'importe'
+    FROM
+        detalles
+;
+
+--Ej4
+
