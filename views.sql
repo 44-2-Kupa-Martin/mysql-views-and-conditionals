@@ -48,4 +48,20 @@ CREATE VIEW v_ListOrderDetails AS
 ;
 
 --Ej4
+DROP VIEW IF EXISTS v_ListTotalAmount;
+
+CREATE VIEW v_ListTotalAmount AS
+    SELECT
+        *,
+        SUM(importe) AS 'total'
+    FROM
+        (SELECT
+            *,
+            precio_unidad*cantidad*(1-descuento) AS 'importe'
+        FROM
+            detalles)
+    AS temp
+    GROUP BY
+        pedido_id
+    ;
 
