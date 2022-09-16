@@ -63,5 +63,57 @@ CREATE VIEW v_ListTotalAmount AS
     AS temp
     GROUP BY
         pedido_id
-    ;
+;
 
+--Ej5
+
+DROP VIEW IF EXISTS v_ListOrdersByNancy;
+
+CREATE VIEW v_ListOrdersByNancy AS
+    SELECT
+        *
+    FROM
+        pedidos
+    WHERE
+        empleado_id = (SELECT id FROM empleados WHERE nombre LIKE 'nancy')
+;
+
+--Ej6
+
+DROP VIEW IF EXISTS v_ListEmployees;
+
+CREATE VIEW v_ListBosses AS
+    SELECT
+        apellidos,
+        cargo,
+        ciudad,
+        cp,
+        direccion,
+        extension,
+        fecha_contratacion,
+        fecha_nacimiento,
+        id,
+        nombre,
+        notas,
+        pais,
+        region,
+        telefono_domicilio,
+        tratamiento,
+        IFNULL(jefe_id, 'director') AS jefe_id
+    FROM
+        empleados
+;
+
+--Ej7
+
+DROP VIEW IF EXISTS imtired;
+
+CREATE VIEW imtired AS
+    SELECT
+        IF(descuento = 0, '5', descuento) AS 'descuento',
+        IF(descuento = 0, 'es cero', 'me quiero morir')
+    FROM
+        detalles
+;
+
+--Ej8
